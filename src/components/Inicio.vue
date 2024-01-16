@@ -1,6 +1,5 @@
 <template>
-  <div>    
-    <b-link :to="{name:'main'}">Siguiente</b-link>
+  <div>        
     <b-breadcrumb router-component-name :items="items"></b-breadcrumb>
   </div>
 </template>
@@ -13,7 +12,7 @@ export default {
           {
             text: 'Inicio',
             href: '#',
-            active:true
+            to:'inicio'
           },
           
         ]

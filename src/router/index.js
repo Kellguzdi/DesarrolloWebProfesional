@@ -31,6 +31,36 @@ const routes = [
                 name:'tercero',
                 component:()=> import('../components/Tercero.vue')
             },
+            {
+                path:'/availableFlights',
+                name:'availableFlights',
+                component:()=> import('../components/VuelosDisponibles.vue')
+            },
+            {
+                path:'/canceledFlights',
+                name:'canceledFlights',
+                component:()=> import('../components/VuelosCancelados.vue')
+            },
+            {
+                path:'/reservations',
+                name:'reservations',
+                component:()=> import('../components/Reservaciones.vue')
+            },
+            {
+                path:'/nextFlight',
+                name:'nextFlight',
+                component:()=> import('../components/proximoVuelo.vue')
+            },
+            {
+                path:'/lineFlights',
+                name:'lineFlights',
+                component:()=> import('../components/LineasVuelo.vue')
+            },
+            {
+                path:'/seats',
+                name:'seats',
+                component:()=> import('../components/Asientos.vue')
+            },
         ]
     }
 ]

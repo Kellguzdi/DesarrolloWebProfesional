@@ -23,25 +23,47 @@
       <b-col md="3">
         <div class="sidebar">
           <b-sidebar
-          z-index="-1"
+          z-index="-1"          
           id="sidebar"
           shadow
           visible
           no-close-on-route-change
-          no-header-close
+          
         >
           <b-nav vertical class="pt-5">
             <b-nav-item 
-              ><b-link :to="{ name: 'inicio' }">Opcion 1</b-link>
+            ><b-link :to="{ name: 'inicio' }">Inicio</b-link>
             </b-nav-item>
             
             <b-nav-item 
-              ><b-link :to="{ name: 'main' }">Opcion 2</b-link>
+              ><b-link :to="{ name: 'main' }">Main</b-link>
             </b-nav-item>
 
             <b-nav-item 
-              ><b-link :to="{ name: 'tercero' }">Opcion 3</b-link>
-            </b-nav-item>                
+              ><b-link :to="{ name: 'tercero' }">Tercero</b-link>
+            </b-nav-item>    
+            <b-nav-item 
+              ><b-link :to="{ name: 'seats' }">Asientos</b-link>
+            </b-nav-item>
+            
+            <b-nav-item 
+              ><b-link :to="{ name: 'lineFlights' }">Lineas de vuelo</b-link>
+            </b-nav-item>
+
+            <b-nav-item 
+              ><b-link :to="{ name: 'nextFlight' }">Proximo vuelo</b-link>
+            </b-nav-item>  
+            <b-nav-item 
+              ><b-link :to="{ name: 'reservations' }">Reservas de vuelos</b-link>
+            </b-nav-item>
+            
+            <b-nav-item 
+              ><b-link :to="{ name: 'availableFlights' }">Vuelos disponibles</b-link>
+            </b-nav-item>
+
+            <b-nav-item 
+              ><b-link :to="{ name: 'canceledFlights' }">Vuelos cancelados</b-link>
+            </b-nav-item>          
           </b-nav>
         </b-sidebar>
         </div>
