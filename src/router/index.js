@@ -14,8 +14,7 @@ const routes = [
         children: [
             {
                 path: '/',
-                component: () => import('../components/Inicio.vue'),
-
+                component: () => import('../components/LandPage.vue'),
                 children: [
                     {
                         path: '/inicio',
