@@ -71,10 +71,15 @@ export default {
       
       this.errors = []
 
-      if (!this.form.name && !this.form.lastname) {
-        this.errors.push('Nombre y apellido requeridos.')
-      }else if(!this.validName(this.form.name)&&!this.validName(this.form.lastname)) {
+      if (!this.form.name) {
+        this.errors.push('Nombre requerido.')
+      }else if(!this.validName(this.form.name)) {
         this.errors.push('Don´t write special characters.')
+      }
+      if (!this.form.lastname) {
+        this.errors.push('Apellido requerido.')
+      }else if(!this.validName(this.form.lastname)) {
+        this.errors.push('Don´t write special characters to lastname.')
       }
       if (!this.form.dir) {
         this.errors.push('Direccion requerida.')
@@ -108,19 +113,20 @@ export default {
       
       e.preventDefault()
     },
-    //validar name que no contenga numeros ni caracteres especiales
+    //validar name solo contenga letras
     validName: function (name) {
-      var re = /^[a-zA-Z\s,'-]+$/;
+      var re = /^[a-zA-Z]+$/;
       return re.test(name);
     },
     validName: function (lastname) {
-      var re = /^[a-zA-Z\s,'-]+$/;
+      var re = /^[a-zA-Z]+$/;
       return re.test(lastname);
     },
     validName: function (middlename) {
-      var re = /^[a-zA-Z\s,'-]+$/;
+      var re = /^[a-zA-Z]+$/;
       return re.test(middlename);
     },
+    
     //validar direccion que no contenga caracteres especiales
     validDir: function (dir) {
       var re = /^[a-zA-Z0-9\s,'-]+$/;
