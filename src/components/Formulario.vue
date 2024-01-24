@@ -1,10 +1,25 @@
 <template>
   <div>
+    <div>
+      <b-alert show variant="danger" v-if="errors.length">
+        <ul>
+          <li v-for="error in errors" :key="error">{{ error }}</li>
+        </ul>
+      </b-alert>
+    </div>
     <b-form @submit="checkForm" @reset="onReset" method="post" novalidate="true" v-if="show">
-
-      <b-form-group id="group-2" label="Nombre completo" label-for="name">
+      
+        <b-form-group id="group-1" label="Nombre " label-for="name">
         <b-form-input id="name" v-model="form.name" type="text" placeholder="Enter you name" required></b-form-input>
       </b-form-group>
+      <b-form-group id="group-1.1" label="Apellido Paterno" label-for="lastname">
+        <b-form-input id="lastname" v-model="form.lastname" type="text" placeholder="Enter you lastname" required></b-form-input>
+      </b-form-group>
+      <b-form-group id="group-1.2" label="Apellido Materno" label-for="middlename">
+        <b-form-input id="middlename" v-model="form.middlename" type="text" placeholder="Enter you middlename" required></b-form-input>
+      </b-form-group>
+      
+      
 
       <b-form-group id="group-2" label="Direccion" label-for="dir">
         <b-form-input id="dir" v-model="form.dir" type="text" placeholder="Enter you direction" required></b-form-input>
@@ -37,53 +52,79 @@
 export default {
   data() {
     return {
-      form: {
-        errors:[],
+      form: {        
         name: '',
+        lastname:'',
+        middlename:'',
         dir: '',
         date: '',
         email: '',
         phone: '',
         img: ''
       },
+      errors:[],
       show: true
     }
   },
   methods: {
     checkForm(e) {
-      if (this.form.name && this.form.dir && this.form.date && this.form.email && this.form.phone && this.form.img) {
-        alert('Formulario enviado')
-      }
+      
       this.errors = []
 
-      if (!this.form.name) {
-        this.errors.push('Name required.')
+      if (!this.form.name && !this.form.lastname) {
+        this.errors.push('Nombre y apellido requeridos.')
+      }else if(!this.validName(this.form.name)&&!this.validName(this.form.lastname)) {
+        this.errors.push('Don´t write special characters.')
       }
       if (!this.form.dir) {
-        this.errors.push('Direction required.')
+        this.errors.push('Direccion requerida.')
+      }else if (!this.validDir(this.form.dir)){
+        this.errors.push('Don´t write special characters to direction.')
       }
       if (!this.form.date) {
-        this.errors.push('Date required.')
+        this.errors.push('Fecha de nacimiento requerida.')
       }else if (!this.validDate(this.form.date)){
-        this.errors.push('Valid date required.')
+        
       }
       if (!this.form.email) {
-        this.errors.push('Email required.')
+        this.errors.push('Email requerido.')
       } else if (!this.validEmail(this.form.email)) {
         this.errors.push('Valid email required.')
       }
       if (!this.form.phone) {
-        this.errors.push('Phone required.')
+        this.errors.push('Telefono requerido.')
       } else if (!this.validPhone(this.form.phone)) {
-        this.errors.push('Valid phone required.')
+        this.errors.push('Must be 10 digits.')
       }
       if (!this.form.img) {
-        this.errors.push('Image required.')
+        this.errors.push('Imagen requerida.')
       }else if (!this.validImg(this.form.img)){
-        this.errors.push('Valid image required.')
+        this.errors.push('Max 3mb.')
       }
-
+      if (!this.errors.length) {        
+        alert("formulario enviado")
+        return true;
+      }
+      
       e.preventDefault()
+    },
+    //validar name que no contenga numeros ni caracteres especiales
+    validName: function (name) {
+      var re = /^[a-zA-Z\s,'-]+$/;
+      return re.test(name);
+    },
+    validName: function (lastname) {
+      var re = /^[a-zA-Z\s,'-]+$/;
+      return re.test(lastname);
+    },
+    validName: function (middlename) {
+      var re = /^[a-zA-Z\s,'-]+$/;
+      return re.test(middlename);
+    },
+    //validar direccion que no contenga caracteres especiales
+    validDir: function (dir) {
+      var re = /^[a-zA-Z0-9\s,'-]+$/;
+      return re.test(dir);
     },
     validDate: function (date){
       var fecha = new Date(date);
@@ -91,6 +132,15 @@ export default {
       var edad = parseInt((hoy -fecha)/365/24/60/60/1000);
       if(edad < 18){
         this.errors.push('You must be 18 years old.')
+      }
+      if(edad > 100){
+        this.errors.push('You must be less than 100 years old.')
+      }
+      if(edad < 0){
+        this.errors.push('You must be born.')
+      }
+      if(fecha >= hoy){
+        this.errors.push('The future not exist.')
       }
     },
     validEmail: function (email) {
